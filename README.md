@@ -1,5 +1,7 @@
 # Implementing an SCD Type 2 dimension from a CDC source using Snowflakes's Stored procedure and Data Quality Checks 
 
+<img src = "img/stored_procedure_scd_type_2.jpg"> 
+
 ## Table of Contents
 
 - [Project Structure](#project-structure)
