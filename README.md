@@ -107,7 +107,7 @@ Make sure you have the following installed on your local development environment
     * Check with: python --version
 * [.venv - Virtual Environment](https://docs.python.org/3/library/venv.html)
   * cd your_repo_folder:
-    * cd "C:\PATH_TO_YOUR_DBT_FOLDER"
+    * cd "C:\PATH_TO_YOUR_FOLDER"
   * python -m venv .venv           (This will create a virtual environment for the repo folder)
   * source .venv/Scripts/activate  (This will activate your virtual environment)
   * Install everything you need for your project from the `requirements.txt` file:
@@ -132,9 +132,11 @@ SNOWFLAKE_ROLE=YOUR_ROLE
 SNOWFLAKE_PASSWORD=YOUR_PASSWORD
 SNOWFLAKE_ACCOUNT=YOUR_ACCOUNT
 SNOWFLAKE_ACCOUNT_URL=https://YOUR_HOST.YOUR_REGION.aws.snowflakecomputing.com
-SNOWFLAKE_WAREHOUSE=MY_DBT_WAREHOUSE
-SNOWFLAKE_DATABASE=MY_DBT_DATABASE
-SNOWFLAKE_SCHEMA=YOUR_SCHEMA
+SNOWFLAKE_WAREHOUSE=MY_WAREHOUSE
+SNOWFLAKE_DATABASE=MY_DATABASE
+SNOWFLAKE_SCHEMA=MY_SCHEMA
+SNOWFLAKE_PRODUCT_STATUS_CDC=PRODUCT_STATUS_CDC
+SNOWFLAKE_PRODUCT_STATUS_HST=PRODUCT_STATUS_HST
 
 If you want to check the environment variables from your current folder, do:
 * printenv (this will show if the environmental variables were loaded within the Docker container)
@@ -146,9 +148,9 @@ If you want to check the environment variables from your current folder, do:
 
    ```bash
    git clone YOUR_GIT_REPO_URL.git
-   cd "C:\PATH_TO_DBT_FOLDER"
+   cd "C:\PATH_TO_FOLDER"
 
 2. **Activate you Virtual Environment (.venv)**
 
-* cd "C:\PATH_TO_DBT_FOLDER"
+* cd "C:\PATH_TO_FOLDER"
 * source .venv/Scripts/activate
