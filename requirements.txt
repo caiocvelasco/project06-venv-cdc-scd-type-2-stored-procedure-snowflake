@@ -1,0 +1,30 @@
+# Integrating Snowflake via Jupyter Notebook
+snowflake-connector-python
+
+# Integrating Data Analysis Tools
+pandas
+# numpy
+
+# Integrating Data Visualization Tools
+# seaborn # For visualization
+# matplotlib # For visualization
+
+# Integrating Jupyter Notebooks
+ipykernel
+jupyter
+
+# Integrating Software Engienering Best Practices Tools
+# pycodestyle # A tool to check your Python code against some of the style conventions in PEP 8
+# pytest # A framework that makes it easy to write small, readable tests
+
+# Integrating SLQ Engines
+# sqlalchemy # Because I run sql commands on a python script and because it depends on psycopg2
+# psycopg2 # A PostgreSQL adapter for Python required to connect to PostgreSQL databases using SQLAlchemy
+# openpyxl # Python library for reading and writing Excel
+# xlrd # Python library for reading and writing Excel
+
+# Integration Other Tools
+# faker # To ingest fake data via the python script with sql
+# tweepy # If we want to access twitter api and manipulate jsons
+# requests # Allows you to send HTTP/1.1 requests extremely easily
+python-dotenv # Reads key-value pairs from a .env file and can set them as environment variables

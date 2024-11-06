@@ -57,8 +57,13 @@ The stored procedure is designed to handle Slowly Changing Dimensions (SCD) Type
   * **scd_table**: Builds the final table for the SCD Type 2, setting scd_start_time and scd_end_time based on the change_time, defaulting future scd_end_time to 2999-01-01 for active records.
 
 * **Merge Operation**:
-  * **MERGE**: A MERGE statement compares the target (existing records in product_status_hst) with the source (new/updated records in scd_table).
-  * **Update Condition**: If there is a match and the cdc_log_position is greater than the last processed log position, it updates product_status_status, scd_start_time, and scd_end_time in the target table.
+  * **MERGE INTO ... AS target USING (...) AS source ON ...**: 
+    * A MERGE statement compares the target (existing records in `product_status_hst`) with the source (new/updated records in scd_table). 
+    * The matching process uses the following keys: 
+      * `product_status_product_key`, `product_status_status`, `scd_start_time`, `scd_end_time`
+    * It does use `product_status_product_key` because if it did, it would wrongly update it in the target depending on the cdc_log_position being used.
+      * For example, if we use the condition `cdc_log_position > 1`, than the source would contain only 2 rows and the `product_status_product_key` would go from 1 to 2 (instead of 1 to 3) and it would mess with the target enumeration process.
+  * **Update Condition (WHEN MATCHED AND ...cdc_log_position > ...)**: If there is a match and the `cdc_log_position` is greater than the a chosen starting point, it updates only the rows after this starting point for the following columns in the target: `product_status_status`, `scd_start_time`, and `scd_end_time`.
   * **Insert Condition**: If there is no match, it inserts the new record with all relevant columns, preserving the SCD history.
 
 * **Execution**:
@@ -109,9 +114,9 @@ Make sure you have the following installed on your local development environment
     * Check with: python --version
 * [.venv - Virtual Environment](https://docs.python.org/3/library/venv.html)
   * cd your_repo_folder:
-    * cd "C:\PATH_TO_YOUR_FOLDER"
-  * python -m venv .venv           (This will create a virtual environment for the repo folder)
-  * source .venv/Scripts/activate  (This will activate your virtual environment)
+    * `cd "C:\PATH_TO_YOUR_FOLDER"`
+  * `python -m venv .venv`           (This will create a virtual environment for the repo folder)
+  * `source .venv/Scripts/activate`  (This will activate your virtual environment)
   * Install everything you need for your project from the `requirements.txt` file:
     * make sure to update pip, this is important to avoid conflicts: `python.exe -m pip install --upgrade pip`
     * `pip install --no-cache-dir -r requirements.txt`  (This will install things inside your virtual environment)
